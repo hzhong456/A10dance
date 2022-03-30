@@ -1,0 +1,89 @@
+.container{
+	width: 85%;
+	margin: auto;
+}
+header{
+	background-color: black;
+	color: white;
+	padding: 15px;
+	margin: 0;
+}
+header::after{/* format for header on one line*/
+	content: '';
+	display: table;
+	clear: both;
+}
+header h1{
+	display: inline;
+	margin: 0;
+	float: left;
+}
+nav{
+	float:right;
+}
+nav ul{
+	margin: 0;
+}
+nav ul li{/*navigation bar*/
+	list-style-type: none;/*removes bullets*/
+	display: inline-block;
+	background-color: black;
+	font-size: 20px;
+	padding: 12px 15px;
+	margin: 0;
+}
+nav ul li:hover{/*navigation bar hover*/
+	font-weight:bold;
+}
+nav ul li a{/*changes links in navagation bar*/
+	color: white;
+	text-decoration: none;/*no underline*/
+}
+body{/*body*/
+	margin: 0;
+	background-color:lightsteelblue;
+}
+.Slideshow{/*setting up container size*/
+	max-width: 80%;/*1000px for container size*/
+	max-height: 580px;
+	position: relative;
+	margin: auto;
+	object-fit: cover;
+}
+
+.PictureSlide{
+	display: none;
+	
+}
+img{
+	margin: 0;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+
+}
+.PictureSlide.one{
+	display:block;
+}
+.previous, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next {/*positions nex button on the right*/
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.previous:hover, .next:hover{
+	/*hover: faded black*/
+	background-color:rgba(0,0,0,0.5);
+}
