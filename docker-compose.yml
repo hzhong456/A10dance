@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+  server:
+    build: server
+    command: npm start
+    volumes:
+      - ./server:/server
+    ports:
+      - "4000:4000"
+    environment:
+      - POSTGRES_URI=postgres://user:pass@db:5432/postgres
+    depends_on:
+      - db

@@ -1,4 +1,6 @@
-const { UserInputError } = require('apollo-server');
+const { UserInputError } = require('apollo-server-express');
+const { User } = require('./models/User');
+const { sequelize } = require('./index');
 
 let users = [
   {
