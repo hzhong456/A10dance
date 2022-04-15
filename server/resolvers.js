@@ -3,26 +3,22 @@ const User = require('./models/user');
 
 const resolvers = {
   Query: {
-    allUsers: () => User.find({}).populate('users'),
-    getUser: (root, args) => User.findOne({ username: args.username }),
+    allUsers: () => User.findAll(),
+    getUser: (root, args) => User.findOne({ where: { username: args.username } }),
   },
   Mutation: {
     addUser: async (root, args) => {
-      let user = await User.findOne({ username: args.username });
+      let user = await User.findOne({ where: { username: args.username } });
 
       if (!user) {
         try {
           user = new User({ username: args.username, name: args.name, role: 'User' });
           await user.save();
         } catch (err) {
-          throw new UserInputError(err.message, {
-            invalidArgs: args,
-          });
+          throw new UserInputError(err.errors[0].message);
         }
       } else {
-        throw new UserInputError('Username already taken', {
-          invalidArgs: args,
-        });
+        throw new UserInputError('There is an existing account with the username');
       }
 
       return user;

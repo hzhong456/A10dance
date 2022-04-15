@@ -1,20 +1,21 @@
 const { ApolloServer } = require('apollo-server');
-const mongoose = require('mongoose');
-require('dotenv').config();
-
+const { connectToDb, syncModels } = require('./util/db');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
+require('dotenv').config();
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.log('Error connecting to MongoDB:', err.message));
+const start = async () => {
+  await connectToDb();
+  await syncModels();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
 
-server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
+  server.listen().then(({ url }) => {
+    console.log(`Server ready at ${url}`);
+  });
+};
+
+start();
