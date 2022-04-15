@@ -13,6 +13,7 @@ services:
     ports:
       - 4000:4000
     environment:
+      - SECRET=secret
       - POSTGRES_URI=postgres://user:pass@db:5432/db
     depends_on:
       - db

@@ -9,12 +9,20 @@ User.init({
     allowNull: false,
     unique: true,
   },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   name: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
   role: {
     type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  attendanceCount: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   id: {

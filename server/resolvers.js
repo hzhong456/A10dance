@@ -1,24 +1,85 @@
 const { UserInputError } = require('apollo-server');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('./models/user');
+require('dotenv').config();
 
 const resolvers = {
   Query: {
     allUsers: () => User.findAll(),
-    getUser: (root, args) => User.findOne({ where: { username: args.username } }),
+    getUser: (root, args) => User.findOne({ where: { username: args.username.toLowerCase() } }),
   },
   Mutation: {
     addUser: async (root, args) => {
-      let user = await User.findOne({ where: { username: args.username } });
+      let user = await User.findOne({ where: { username: args.username.toLowerCase() } });
+
+      if (args.role !== 'Student' || args.role !== 'Professor' || !args.role) {
+        // eslint-disable-next-line no-param-reassign
+        args.role = 'Student';
+      }
 
       if (!user) {
+        const hashedPassword = await bcrypt.hash(args.password, 10);
+
         try {
-          user = new User({ username: args.username, name: args.name, role: 'User' });
+          user = new User(
+            {
+              username: args.username.toLowerCase(),
+              password: hashedPassword,
+              name: args.name,
+              role: args.role,
+              attendanceCount: 0,
+            },
+          );
           await user.save();
         } catch (err) {
           throw new UserInputError(err.errors[0].message);
         }
       } else {
         throw new UserInputError('There is an existing account with the username');
+      }
+
+      return user;
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ where: { username: args.username.toLowerCase() } });
+
+      if (user) {
+        const passwordCorrect = await bcrypt.compare(args.password, user.password);
+
+        if (!passwordCorrect) {
+          throw new UserInputError('Invalid password');
+        }
+
+        try {
+          const userForToken = {
+            username: user.username,
+            id: user.id,
+          };
+
+          const token = jwt.sign({ userForToken, id: user.id }, process.env.SECRET);
+
+          return { token, username: user.username, name: user.name };
+        } catch (err) {
+          throw new UserInputError(err.errors[0].message);
+        }
+      } else {
+        throw new UserInputError('No account with username found');
+      }
+    },
+    attended: async (root, args) => {
+      const user = await User.findOne({ where: { username: args.username.toLowerCase() } });
+
+      if (user) {
+        try {
+          // eslint-disable-next-line no-multi-assign
+          user.attendanceCount = user.attendanceCount += 1;
+          await user.save();
+        } catch (err) {
+          throw new UserInputError(err.errors[0].message);
+        }
+      } else {
+        throw new UserInputError('User not found');
       }
 
       return user;
