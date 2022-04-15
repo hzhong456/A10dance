@@ -1,46 +1,20 @@
-const { ApolloServer } = require('apollo-server-express');
-const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
-const { Sequelize } = require('sequelize');
-const express = require('express');
-const http = require('http');
+const { ApolloServer } = require('apollo-server');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 
-const sequelize = new Sequelize(process.env.POSTGRES_URI);
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.log('Error connecting to MongoDB:', err.message));
 
-const start = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log(`Connecected to database at ${process.env.POSTGRES_URI}`);
-  } catch (err) {
-    console.error(`Error connecting to database ${err}`);
-  }
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-  const app = express();
-  const httpServer = http.createServer(app);
-
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-  const server = new ApolloServer({
-    schema,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  });
-
-  await server.start();
-
-  server.applyMiddleware({
-    app,
-    path: '/',
-  });
-
-  const PORT = 4000;
-
-  httpServer.listen(PORT, () => console.log(`Server is now running at http://localhost:${PORT}`));
-};
-
-start();
-
-module.exports = sequelize;
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`);
+});

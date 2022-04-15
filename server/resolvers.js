@@ -1,35 +1,30 @@
-const { UserInputError } = require('apollo-server-express');
-const { User } = require('./models/User');
-const { sequelize } = require('./index');
-
-let users = [
-  {
-    username: 'testusername-1',
-    name: 'Test 1',
-    id: 12345,
-  },
-  {
-    username: 'testusername-2',
-    name: 'Test 2',
-    id: 12345,
-  },
-];
+const { UserInputError } = require('apollo-server');
+const User = require('./models/user');
 
 const resolvers = {
   Query: {
-    allUsers: () => users,
-    getUser: (root, args) => users.find((u) => u.username === args.username),
+    allUsers: () => User.find({}).populate('users'),
+    getUser: (root, args) => User.findOne({ username: args.username }),
   },
   Mutation: {
-    addUser: (root, args) => {
-      if (users.find((u) => u.username === args.username)) {
-        throw new UserInputError('Username currently in use', {
-          invalidArgs: args.username,
+    addUser: async (root, args) => {
+      let user = await User.findOne({ username: args.username });
+
+      if (!user) {
+        try {
+          user = new User({ username: args.username, name: args.name, role: 'User' });
+          await user.save();
+        } catch (err) {
+          throw new UserInputError(err.message, {
+            invalidArgs: args,
+          });
+        }
+      } else {
+        throw new UserInputError('Username already taken', {
+          invalidArgs: args,
         });
       }
 
-      const user = { ...args, id: Math.floor(Math.random() * 1000000) };
-      users = users.concat(user);
       return user;
     },
   },

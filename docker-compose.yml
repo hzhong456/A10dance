@@ -1,22 +1,21 @@
-version: "3.9"
-
 services:
-  db:
-    image: postgres
+  mongo:
+    image: mongo
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - ./db:/data/db
+      - ./server/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - 27017:27017
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
+      - MONGO_INITDB_DATABASE=db
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
   server:
     build: server
     command: npm start
-    volumes:
-      - ./server:/server
     ports:
-      - "4000:4000"
-    environment:
-      - POSTGRES_URI=postgres://user:pass@db:5432/postgres
+      - 4000:4000
     depends_on:
-      - db
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://user:pass@mongo:27017/db

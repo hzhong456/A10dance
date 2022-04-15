@@ -1,26 +1,21 @@
-const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../index');
+const mongoose = require('mongoose');
 
-class User extends Model {}
-User.init({
+const schema = new mongoose.Schema({
   username: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 1,
   },
   name: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
+    minlength: 1,
   },
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+  role: {
+    type: String,
+    required: true,
   },
-}, {
-  sequelize,
-  underscored: true,
-  timestamps: false,
-  modelName: 'user',
 });
 
-module.exports = User;
+module.exports = mongoose.model('User', schema);
