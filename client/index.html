@@ -10,28 +10,35 @@
     <title> A10Dance </title>
   </head>
 <body>
-	<div class = "container"></div>
-    <h1 class = "header"> Attendance Tracker </h1>
-    <h3 class = "text-center"> Log in </h3>
-    <img src = "Attendance.png" alt = "Attendance logo">
-    <div class="mb-3, text-center">
-      <label for="Login_input" class="login_field form-control-lg"> User Name:</label>
-      <input type="text" class="login_field" id="Login_input" placeholder="User Name...">
+	<div class = "container">
+    <h1 class = "header"> A10Dance Tracker </h1>
+    <table>
+      <tr>
+        <td> 
+          <img src = "Attendance.png" alt = "Attendance logo">
+        </td>
+        <td>
+          <h3 class = "text-center"> Log in </h3>
+          <div class="mb-3, text-center">
+            <label for="Login_input" class="login_field form-control-lg"> User Name:</label>
+            <input type="text" class="login_field" id="Login_input" placeholder="User Name...">
+          </div>
+          <div class="mb-3, text-center">
+            <label for="Password_input" class="password_field form-control-lg">Password:  </label>
+            <input type="password" class="password_field" id="Password_input" placeholder="Password...">
+          </div>
+          <form action = "welcome.html">
+            <div class="Submit, mb-3, text-center">
+              <button type="submit" class="btn btn-primary mb-3">Login</button>
+            </div>
+          </form>
+          
+        </td>
+      </tr>
+    </table>
+    
     </div>
-    <div class="mb-3, text-center">
-      <label for="Password_input" class="password_field form-control-lg">Password:  </label>
-      <input type="password" class="password_field" id="Password_input" placeholder="Password...">
-    </div>
-    <form action = "welcome.html">
-     <div class="Submit, mb-3, text-center">
-        <button type="submit" class="btn btn-primary mb-3">Login</button>
-      </div>
-    </form>
-    <form action = "Professor/professorWelcome.html">
-      <div class="Submit, mb-3, text-center">
-         <button type="submit" class="btn btn-primary mb-3">Professor Login</button>
-       </div>
-     </form>
   </div>
 </body>
 </html>
+
