@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+			Attendance
+		</title>
+		<link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css" />
+
+		<link href = "welcome.css" rel = "stylesheet">
+	</head>
+
+	<body>
+		<div class = "container">
+		<header><!--header-->
+			<h1> Welcome</h1>
+				<nav><!--navagation bar-->
+					<ul>
+						<li> <a href = "welcome.html"> Welcome </a> </li>
+						<li> <a href = "account.html"> Account </a> </li>
+						<li> <a href = "index.html"> Log Out </a> </li>
+					</ul>
+				</nav>
+		</header><!-- end of header-->
+		<!-- original sisde by side<div class = "email">
+			<h1> Mark attendance</h1>
+			<form class = "contact-form" action="contactForm.php" method="post">
+			<button type="submit" name="submit">Check in!</button>
+			</form>
+			<div class="mb-3, text-center">
+				<label for="Password_input" class="password_field form-control-lg"></label>
+				<input type="password" class="password_field" id="Password_input" placeholder="Todays code">
+				<button type="submit" name="submit">Submit</button>
+			  </div>-->
+		</div><!--end of email part-->
+		<div class = "calendar-container">
+		<div class = "calendar">
+			<div class="month">
+				<div class="prev"> < </div>
+				<div class="date">
+					<h1> </h1>
+					<p></p>
+				</div>
+				<div class="next"> > </div>
+			</div>
+			<div class="weekdays">
+				<div> Sun</div>
+				<div> Mon</div>
+				<div> Tue</div>
+				<div> Wed</div>
+				<div> Thu</div>
+				<div> Fri</div>
+				<div> Sat</div>
+			</div>
+			<div class="days">
+				<div class="today" onclick="showDiv()" >
+					</div>
+			</div>
+		</div><!--end of calendar div-->
+		<div id = "code-input" style = "display: none;">
+			<div class="mb-3, text-center"><!--open div for code_input-->
+				<label for="code_input" class="login_field form-control-lg"> Attendance Code:</label>
+				<input type="text" class="login_field" id="Login_input" placeholder="Code ...">
+			</div><!--closing code_input div-->
+			<div class="Submit, mb-3, text-center"><!--open div for submit button-->
+				<button type="submit" class="btn btn-primary mb-3">Submit</button>
+			</div><!--closing submit button code-->
+		</div><!-- closing div for code-input -->
+		</div>	<!-- end of calendar div-->
+		</div><!--end of calendar container div-->
+	</div><!--end of container-->
+		<script src = "script.js"></script>
+	</body>
+</html>

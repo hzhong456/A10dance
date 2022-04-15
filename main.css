@@ -1,0 +1,22 @@
+.container{
+	width: 85%;
+	margin: auto;
+}
+body{
+	background-color: lightsteelblue;
+  }
+img{
+	width: 300px;
+	height: 300px;
+}
+.header{
+	color: lightsteelblue;
+	background-color: black;
+	width: 85%;
+	margin: auto;
+	text-align: center;
+	border-radius: 5px;
+  }
+
+  
+
