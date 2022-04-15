@@ -1,7 +1,22 @@
+.container{
+	width: 85%;
+	margin: auto;
+}
 body{
-    background-color: lightsteelblue;
+	background-color: lightsteelblue;
   }
-  h1{
-    color: lightblue;
-    background-color: black;
+img{
+	width: 300px;
+	height: 300px;
+}
+.header{
+	color: lightsteelblue;
+	background-color: black;
+	width: 85%;
+	margin: auto;
+	text-align: center;
+	border-radius: 5px;
   }
+
+  
+
