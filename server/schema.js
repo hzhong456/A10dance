@@ -15,10 +15,8 @@ const typeDefs = gql`
     getUser(username: String!): User
   }
 
-  type SessionInfo {
-    token: String!
-    username: String!
-    name: String!
+  type Token {
+    value: String!
   }
 
   type Mutation {
@@ -31,7 +29,7 @@ const typeDefs = gql`
     login(
       username: String!
       password: String!
-    ): SessionInfo
+    ): Token
     attended(
       username: String!
     ): User

@@ -52,14 +52,12 @@ const resolvers = {
         }
 
         try {
-          const userForToken = {
-            username: user.username,
-            id: user.id,
+          return {
+            value: jwt.sign({
+              username: user.username,
+              id: user.id,
+            }, process.env.SECRET),
           };
-
-          const token = jwt.sign({ userForToken, id: user.id }, process.env.SECRET);
-
-          return { token, username: user.username, name: user.name };
         } catch (err) {
           throw new UserInputError(err.errors[0].message);
         }
