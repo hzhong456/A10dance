@@ -13,11 +13,6 @@ const resolvers = {
     addUser: async (root, args) => {
       let user = await User.findOne({ where: { username: args.username.toLowerCase() } });
 
-      if (args.role !== 'Student' || args.role !== 'Professor' || !args.role) {
-        // eslint-disable-next-line no-param-reassign
-        args.role = 'Student';
-      }
-
       if (!user) {
         const hashedPassword = await bcrypt.hash(args.password, 10);
 
@@ -32,14 +27,19 @@ const resolvers = {
             },
           );
           await user.save();
+
+          return {
+            value: jwt.sign({
+              username: user.username,
+              id: user.id,
+            }, process.env.SECRET),
+          };
         } catch (err) {
           throw new UserInputError(err.errors[0].message);
         }
       } else {
         throw new UserInputError('There is an existing account with the username');
       }
-
-      return user;
     },
     login: async (root, args) => {
       const user = await User.findOne({ where: { username: args.username.toLowerCase() } });

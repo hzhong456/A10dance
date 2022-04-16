@@ -25,7 +25,7 @@ const typeDefs = gql`
       password: String!
       name: String!
       role: String!
-    ): User
+    ): Token
     login(
       username: String!
       password: String!
