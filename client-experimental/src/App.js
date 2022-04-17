@@ -4,32 +4,38 @@ import { Routes, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Welcome from './components/Welcome';
 import Dashboard from './components/Dashboard';
+import AttendanceList from './components/AttendanceList';
 import Login from './components/Login';
 import Register from './components/Register';
 import './App.css';
 
 const App = () => {
+  const [name, setName] = useState('');
   const [token, setToken] = useState(null);
   const client = useApolloClient();
 
   useEffect(() => {
     const storageToken = localStorage.getItem('token');
-    if (storageToken) {
+    const nameToken = localStorage.getItem('name');
+    if (storageToken && nameToken) {
       setToken(storageToken);
+      setName(nameToken);
     }
   }, []);
 
   return (
     <div>
       <div>
-        <Menu token={token} setToken={setToken} client={client} />
+        <Menu token={token} setToken={setToken} client={client}
+        name={name} setName={setName} />
       </div>
       <div className='container'>
         <Routes>
-          {!token && <Route path="/" element={<Welcome/>} />}
-          {token && <Route path="/" element={<Dashboard/>} />}
-          {!token && <Route path="/login" element={<Login setToken={setToken}/>} />}
-          {!token && <Route path="/register" element={<Register setToken={setToken}/>} />}
+          {!token && <Route path="/" element={<Welcome />} />}
+          {token && <Route path="/" element={<Dashboard />} />}
+          {token && <Route path="/attendance-list" element={<AttendanceList />} />}
+          {!token && <Route path="/login" element={<Login setToken={setToken} setName={setName} />} />}
+          {!token && <Route path="/register" element={<Register />} />}
         </Routes>
       </div>
     </div>

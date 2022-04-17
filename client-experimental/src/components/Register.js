@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { REGISTER } from '../queries';
 import Notification from './Notification';
 
-const Register = (props) => {
+const Register = () => {
   const [message, setMessage] = useState(null);
   let messageTimeout;
-  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('Student');
 
-  const [register, result] = useMutation(REGISTER, {
-    onCompleted: () => navigate('/'),
+  const [register] = useMutation(REGISTER, {
+    onCompleted: () => {
+      setMessage(['added', `Account ${username} created`]);
+      clearTimeout(messageTimeout);
+      messageTimeout = setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    },
     onError: (err) => {
       setMessage(['error', `${err}`]);
       clearTimeout(messageTimeout);
@@ -24,14 +28,6 @@ const Register = (props) => {
       }, 5000);
     },
   });
-
-  useEffect(() => {
-    if (result.data) {
-      const token = result.data.addUser.value;
-      props.setToken(token);
-      localStorage.setItem('token', token);
-    }
-  }, [props, result.data]);
 
   const submit = async (event) => {
     event.preventDefault();

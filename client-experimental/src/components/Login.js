@@ -26,8 +26,11 @@ const Login = (props) => {
   useEffect(() => {
     if (result.data) {
       const token = result.data.login.value;
+      const { name } = result.data.login.user;
       props.setToken(token);
+      props.setName(name);
       localStorage.setItem('token', token);
+      localStorage.setItem('name', name);
     }
   }, [props, result.data]);
 

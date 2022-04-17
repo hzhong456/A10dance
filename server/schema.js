@@ -13,10 +13,12 @@ const typeDefs = gql`
   type Query {
     allUsers: [User]
     getUser(username: String!): User
+    me: User
   }
 
   type Token {
     value: String!
+    user: User!
   }
 
   type Mutation {

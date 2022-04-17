@@ -8,6 +8,7 @@ const resolvers = {
   Query: {
     allUsers: () => User.findAll(),
     getUser: (root, args) => User.findOne({ where: { username: args.username.toLowerCase() } }),
+    me: (root, args, context) => context.currentUser,
   },
   Mutation: {
     addUser: async (root, args) => {
@@ -57,6 +58,7 @@ const resolvers = {
               username: user.username,
               id: user.id,
             }, process.env.SECRET),
+            user,
           };
         } catch (err) {
           throw new UserInputError(err.errors[0].message);
