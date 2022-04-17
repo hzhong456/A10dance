@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Form, Button } from 'react-bootstrap';
+import {
+  Card, Form,
+  Button, Row, Col,
+} from 'react-bootstrap';
 import { REGISTER } from '../queries';
 import Notification from './Notification';
 
@@ -43,23 +46,48 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <Card className='login-box mx-auto'>
+      <Card.Header>Register</Card.Header>
       <Notification message={message} />
-      <Form onSubmit={submit}>
+      <Form onSubmit={submit} className='login-form'>
         <Form.Group>
-          <Form.Label>Username</Form.Label>
-          <Form.Control value={username} onChange={({ target }) => setUsername(target.value)} />
-          <Form.Label>Password</Form.Label>
-          <Form.Control type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
-          <Form.Label>Name</Form.Label>
-          <Form.Control value={name} onChange={({ target }) => setName(target.value)} />
-          <Form.Label>Role</Form.Label>
-          <Form.Check type={'radio'} name={'role'} label={'Student'} checked onChange={() => setRole('Student')} />
-          <Form.Check type={'radio'} name={'role'} label={'Professor'} onChange={() => setRole('Professor')} />
+          <Row>
+            <Col md={3}>
+              <Form.Label>Username</Form.Label>
+            </Col>
+            <Col>
+              <Form.Control value={username} onChange={({ target }) => setUsername(target.value)} />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={3}>
+              <Form.Label>Password</Form.Label>
+            </Col>
+            <Col>
+              <Form.Control type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={3}>
+              <Form.Label>Name</Form.Label>
+            </Col>
+            <Col>
+              <Form.Control value={name} onChange={({ target }) => setName(target.value)} />
+            </Col>
+          </Row>
+          <Row>
+          <Col md={3}>
+            <Form.Label>Role</Form.Label>
+          </Col>
+          <Col>
+            <Form.Check type={'radio'} name={'role'} label={'Student'} checked onChange={() => setRole('Student')} />
+            <Form.Check type={'radio'} name={'role'} label={'Professor'} onChange={() => setRole('Professor')} />
+          </Col>
+          </Row>
           <Button type='submit'>Register</Button>
         </Form.Group>
       </Form>
-    </div>
+      </Card>
   );
 };
 

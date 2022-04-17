@@ -31,3 +31,15 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const ME = gql`
+  query {
+    me {
+      username
+      name
+      role
+      attendanceCount
+      id
+    }
+  }
+`;

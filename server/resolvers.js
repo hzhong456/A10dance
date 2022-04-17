@@ -12,6 +12,10 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (root, args) => {
+      if (!args.username || !args.name || !args.password) {
+        throw new UserInputError('Some fields are blank');
+      }
+
       let user = await User.findOne({ where: { username: args.username.toLowerCase() } });
 
       if (!user) {
