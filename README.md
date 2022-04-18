@@ -1,2 +1,2 @@
 # Attendance Tracker
-For CSC 468
+Deliverable 2 can be found in the deliverable directory
