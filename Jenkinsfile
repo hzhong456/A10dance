@@ -13,8 +13,8 @@ pipeline {
       steps{
         container('docker') {
           sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
-          sh 'cd webui; docker build -t $DOCKER_USER/webui:$BUILD_NUMBER .'
-          sh 'docker push $DOCKER_USER/webui:$BUILD_NUMBER'
+          sh 'cd node; docker build -t $DOCKER_USER/node:$BUILD_NUMBER .'
+          sh 'docker push $DOCKER_USER/node:$BUILD_NUMBER'
         }
       }
     }
@@ -26,11 +26,11 @@ pipeline {
       }
       steps {
         sshagent(credentials: ['cloudlab']) {
-          sh "sed -i 's/DOCKER_REGISTRY/${docker_user}/g' webui.yaml"
-          sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' webui.yaml"
+          sh "sed -i 's/DOCKER_REGISTRY/${docker_user}/g' node.yaml"
+          sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' node.yaml"
           sh 'scp -r -v -o StrictHostKeyChecking=no *.yaml $SERVER_ADDRESS:~/'
-          sh 'ssh -o StrictHostKeyChecking=no $SERVER_ADDRESS kubectl apply -f /users/lngo/webui.yaml -n jenkins'
-          sh 'ssh -o StrictHostKeyChecking=no $SERVER_ADDRESS kubectl apply -f /users/lngo/webui-service.yaml -n jenkins'
+          sh 'ssh -o StrictHostKeyChecking=no $SERVER_ADDRESS kubectl apply -f /users/lngo/node.yaml -n jenkins'
+          sh 'ssh -o StrictHostKeyChecking=no $SERVER_ADDRESS kubectl apply -f /users/lngo/node-service.yaml -n jenkins'
         }
       }
     }
