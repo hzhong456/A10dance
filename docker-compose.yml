@@ -1,5 +1,14 @@
 version: "3"
 services:
+  react:
+    container_name: nginxreactapp
+    build:
+      context: .
+      dockerfile: client-experimental/Dockerfile
+    ports:
+      - 80:80
+    environment:
+      NODE_ENV: production
   db:
     image: postgres
     volumes:
@@ -18,12 +27,3 @@ services:
       - POSTGRES_URI=postgres://user:pass@db:5432/db
     depends_on:
       - db
-  react:
-    container_name: nginxreactapp
-    build:
-      context: .
-      dockerfile: client-experimental/Dockerfile
-    ports:
-      - 80:80
-    environment: 
-      NODE_ENV: production
