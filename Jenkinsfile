@@ -2,11 +2,11 @@ pipeline {
   agent none
   stages {
     stage('Publish') {
-        agent {
-          kubernetes {
-            inheritFrom 'agent-template'
-          }
+      agent {
+        kubernetes {
+          inheritFrom 'agent-template'
         }
+      }
       steps{
         container('docker') {
           sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
