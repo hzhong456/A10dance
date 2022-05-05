@@ -13,8 +13,8 @@ spec:
         app: webui
     spec:
       containers:
-      - name: webui
-        image: DOCKER_USER/attendance-webui:BUILD_NUMBER
+      - name: nginx
+        image: nginx
         ports:
           - name: http-port
             containerPort: 80
