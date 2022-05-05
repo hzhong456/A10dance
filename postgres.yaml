@@ -23,5 +23,5 @@ spec:
           - name: POSTGRES_PASSWORD
             value: pass
         ports:
-          - name: postgres-port
+          - name: http-port
             containerPort: 5432
