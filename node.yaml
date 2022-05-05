@@ -15,6 +15,11 @@ spec:
       containers:
       - name: node
         image: DOCKER_USER/attendance-node:BUILD_NUMBER
+        env:
+          - name: SECRET
+            value: secret
+          - name: POSTGRES_URI
+            value: postgres://user:pass@db:5432/db
         ports:
           - name: node-port
             containerPort: 4000
