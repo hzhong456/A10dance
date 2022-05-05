@@ -1,3 +1,4 @@
+ENV NODE_ENV=development
 FROM node:16
 WORKDIR /server
 COPY package*.json ./
