@@ -1,8 +1,8 @@
-ENV NODE_ENV=development
 FROM node:16
 WORKDIR /server
 COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
 EXPOSE 4000
+ENV NODE_ENV=development
 CMD ["node", "index.js"]
