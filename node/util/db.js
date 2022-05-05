@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(process.env.POSTGRES_URI);
+const sequelize = new Sequelize(process.env.POSTGRES_URI, { dialect: 'postgres' });
 
 const connectToDb = async () => {
   try {
