@@ -19,7 +19,7 @@ spec:
           - name: SECRET
             value: secret
           - name: POSTGRES_URI
-            value: postgres://user:pass@db:5432/db
+            value: postgres://user:pass@localhost:5432/db
         ports:
-          - name: node-port
+          - name: http-port
             containerPort: 4000
