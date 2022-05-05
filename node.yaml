@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node
-        image: DOCKER_REGISTRY/attendance-node:BUILD_NUMBER
+        image: DOCKER_USER/attendance-node:BUILD_NUMBER
         ports:
           - name: node-port
             containerPort: 4000
