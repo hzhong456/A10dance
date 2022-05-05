@@ -10,7 +10,7 @@ pipeline {
       steps{
         container('docker') {
           sh 'echo $DOCKER_TOKEN | docker login --username $DOCKER_USER --password-stdin'
-          sh 'cd attendance-node; docker build -t $DOCKER_USER/attendance-node:$BUILD_NUMBER .'
+          sh 'cd node; docker build -t $DOCKER_USER/attendance-node:$BUILD_NUMBER .'
           sh 'docker push $DOCKER_USER/attendance-node:$BUILD_NUMBER'
         }
       }
