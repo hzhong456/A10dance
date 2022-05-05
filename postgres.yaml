@@ -17,4 +17,4 @@ spec:
         image: postgres
         ports:
           - name: postgres-port
-            containerPort: 4000
+            containerPort: 5432
