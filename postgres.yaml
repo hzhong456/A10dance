@@ -17,11 +17,11 @@ spec:
         image: postgres
         env:
           - name: POSTGRES_DB
-            value: ${DB_NAME}
+            value: db
           - name: POSTGRES_USER
-            value: ${DB_USER}
+            value: user
           - name: POSTGRES_PASSWORD
-            value: ${DB_PASS}
+            value: pass
         ports:
           - name: postgres-port
             containerPort: 5432
