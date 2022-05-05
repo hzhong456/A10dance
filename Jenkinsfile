@@ -23,7 +23,7 @@ pipeline {
       }
       steps {
         sshagent(credentials: ['cloudlab']) {
-          sh "sed -i 's/DOCKER_REGISTRY/${DOCKER_USER}/g' node.yaml"
+          sh "sed -i 's/DOCKER_USER/${DOCKER_USER}/g' node.yaml"
           sh "sed -i 's/BUILD_NUMBER/${BUILD_NUMBER}/g' node.yaml"
           sh 'scp -r -v -o StrictHostKeyChecking=no *.yaml $USER@$SERVER_ADDRESS:~/'
           sh 'ssh -o StrictHostKeyChecking=no $USER@$SERVER_ADDRESS kubectl apply -f /users/$USER/node.yaml -n jenkins'
