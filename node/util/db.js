@@ -5,7 +5,7 @@ const sequelize = new Sequelize(process.env.POSTGRES_URI, { dialect: 'postgres' 
 const connectToDb = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connected to PostgreSQL connected');
+    console.log('Connected to PostgreSQL at: ', process.env.POSTGRES_URI);
   } catch (err) {
     console.log('Error connecting to PostgreSQL: ', err);
     return process.exit(1);
