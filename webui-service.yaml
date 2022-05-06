@@ -3,9 +3,11 @@ kind: Service
 metadata:
   name: webui
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - port: 80
+      protocol: TCP
       targetPort: 80
+      NodePort: 30080
   selector:
     app: webui
