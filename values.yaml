@@ -1,5 +1,6 @@
-name: my-app
-container:
-  name:
-  image:
+metadata:
+  name: node
+spec:
+  type: NodePort
+  ports:
   port:
