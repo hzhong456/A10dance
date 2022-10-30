@@ -1,17 +1,17 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Card, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+
 import { ALLUSERS } from '../queries';
 
 const AttendanceList = () => {
   const users = useQuery(ALLUSERS);
 
   if (users.loading) return <div>Loading...</div>;
-
   return (
-  <Card>
-    <Card.Header>Attendance List</Card.Header>
-    <Card.Body>
+  <div className='bg-white border border-dark border-opacity-25 p-5 rounded-4'>
+    <h2>Attendance List</h2>
+    <div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -20,14 +20,14 @@ const AttendanceList = () => {
           </tr>
         </thead>
         <tbody>
-          {users.data.allUsers.map((a) => <tr key={a.id}>
+          {users.data ? users.data.allUsers.map((a) => <tr key={a.id}>
             <td>{a.name}</td>
             <td>{a.attendanceCount}</td>
-          </tr>)}
+          </tr>) : <div></div>}
         </tbody>
       </Table>
-    </Card.Body>
-  </Card>
+    </div>
+  </div>
   );
 };
 
