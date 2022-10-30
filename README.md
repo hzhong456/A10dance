@@ -14,5 +14,5 @@ This is the web interface for A10Dance.
 2. Run `docker build -t username/attendance-webui:version .`.
 
 ## Run in Docker
-1. Run 'docker run -p 3000:80 -d username/attendance-webui:version'.
+1. Run `docker run -p 3000:80 -d username/attendance-webui:version`.
 2. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
