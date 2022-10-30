@@ -14,7 +14,8 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
 
   const [login, result] = useMutation(LOGIN, {
-    onCompleted: () => navigate('/dashboard'),
+    onCompleted: () => {
+    },
     onError: (err) => {
       setMessage(['error', `${err}`]);
       clearTimeout(messageTimeout);
@@ -24,6 +25,7 @@ const Login = (props) => {
     },
   });
 
+
   useEffect(() => {
     if (result.data) {
       const token = result.data.login.value;
@@ -32,8 +34,9 @@ const Login = (props) => {
       props.setName(name);
       localStorage.setItem('token', token);
       localStorage.setItem('name', name);
+      navigate('/dashboard');
     }
-  }, [props, result.data]);
+  }, [props, navigate, result.data]);
 
   const submit = async (event) => {
     event.preventDefault();

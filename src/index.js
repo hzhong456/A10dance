@@ -21,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
 
 // TODO: This needs to be more dynamic.
 const httpLink = new HttpLink({
-  uri: 'http://clnodevm014-1.clemson.cloudlab.us:40000/',
+  uri: 'http://localhost:4000',
 });
 
 const client = new ApolloClient({
