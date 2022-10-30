@@ -1,8 +1,11 @@
-const { UserInputError } = require('apollo-server');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('./models/user');
-require('dotenv').config();
+import { UserInputError } from 'apollo-server';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import User from './models/user.js';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 const resolvers = {
   Query: {
@@ -28,8 +31,8 @@ const resolvers = {
               password: hashedPassword,
               name: args.name,
               role: args.role,
-              attendanceCount: 0,
-            },
+              attendanceCount: 0
+            }
           );
           await user.save();
 
@@ -76,7 +79,6 @@ const resolvers = {
 
       if (user) {
         try {
-          // eslint-disable-next-line no-multi-assign
           user.attendanceCount = user.attendanceCount += 1;
           await user.save();
         } catch (err) {
@@ -91,4 +93,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;

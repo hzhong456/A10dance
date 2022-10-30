@@ -1,10 +1,15 @@
-const { ApolloServer } = require('apollo-server');
-const jwt = require('jsonwebtoken');
-const { connectToDb, syncModels } = require('./util/db');
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
-const User = require('./models/user');
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+import {checkEnvVariables} from "./util/checkEnvVaraibles.js";
+checkEnvVariables();
+
+import {ApolloServer} from "apollo-server";
+import jwt from "jsonwebtoken";
+
+import { connectToDb, syncModels } from './util/db.js';
+import typeDefs from './schema.js';
+import resolvers from './resolvers.js';
+import User from './models/user.js';
 
 const start = async () => {
   await connectToDb();
@@ -13,7 +18,6 @@ const start = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // eslint-disable-next-line consistent-return
     context: async ({ req }) => {
       const auth = req ? req.headers.authorization : null;
       if (auth && auth.toLowerCase().startsWith('bearer ')) {
@@ -30,3 +34,5 @@ const start = async () => {
 };
 
 start();
+
+export {checkEnvVariables};
