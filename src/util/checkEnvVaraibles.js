@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 const checkEnvVariables = () => {
   let shouldExit = false;
   if(typeof process.env.POSTGRES_HOST === 'undefined') {

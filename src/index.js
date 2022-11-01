@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import {checkEnvVariables} from "./util/checkEnvVaraibles.js";
 checkEnvVariables();
 
