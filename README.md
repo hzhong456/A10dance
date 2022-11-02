@@ -14,5 +14,5 @@ This is the backend server for A10Dance.
 2. Run `docker build -t username/attendance-node:version .`.
 
 ## Run in Docker
-1. Run `docker run -p 4000:4000 -d username/attendance-node:version`.
+1. Run `docker run -p 4000:4000 -d -e SECRET=secret -e POSTGRES_HOST='attendance.abcd123.us-east-2.rds.amazonaws.com' -e POSTGRES_PORT=5432 -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=password123 -e POSTGRES_DATABASE=testdb username/attendance-node:version`.
 2. The graphql server will be at [http://localhost:4000](http://localhost:4000).
