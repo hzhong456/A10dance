@@ -15,7 +15,7 @@ This can be overridden by setting the REACT_APP_BACKEND_URL environment variable
 
 ## Build in Docker
 1. Ensure you are in the directory with the Dockerfile.
-2. Run `docker build -t username/attendance-webui:version .`.
+2. Run `docker build --build-arg REACT_APP_BACKEND_URL='http://localhost:4000' -t username/attendance-webui:version .`.
 
 ## Run in Docker
 1. Run `docker run -p 3000:80 -d username/attendance-webui:version`.

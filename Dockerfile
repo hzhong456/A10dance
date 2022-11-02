@@ -10,6 +10,9 @@ RUN npm ci --omit=dev
 COPY public ./public
 COPY src ./src
 
+ARG REACT_APP_BACKEND_URL='http://localhost:4000'
+ENV REACT_APP_BACKEND_URL ${REACT_APP_BACKEND_URL}
+
 RUN npm run build
 
 FROM nginx
