@@ -21,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
 
 // TODO: This needs to be more dynamic.
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
+  uri: process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000',
 });
 
 const client = new ApolloClient({

@@ -5,7 +5,7 @@ WORKDIR '/webui'
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm install
+RUN npm ci --omit=dev
 
 COPY public ./public
 COPY src ./src

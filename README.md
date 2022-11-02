@@ -1,6 +1,10 @@
 # WebUI
 This is the web interface for A10Dance.
 
+## Overriding backend URL
+By default, the backend will be queried at (http://localhost:4000)[http://localhost:4000].
+This can be overridden by setting the REACT_APP_BACKEND_URL environment variable.
+
 ## Building
 1. Run `npm install`.
 2. Run `npm run build`.
