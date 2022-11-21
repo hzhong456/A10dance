@@ -64,6 +64,7 @@ const resolvers = {
             value: jwt.sign({
               username: user.username,
               id: user.id,
+              role: user.role
             }, process.env.SECRET),
             user,
           };
