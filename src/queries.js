@@ -19,6 +19,7 @@ export const LOGIN = gql`
       value
       user {
         name
+        role
       }
     }
   }
@@ -28,6 +29,14 @@ export const REGISTER = gql`
   mutation AddUser($username: String!, $password: String!, $name: String!, $role: String!) {
     addUser(username: $username, password: $password, name: $name, role: $role) {
       value
+    }
+  }
+`;
+
+export const ATTENDED = gql`
+  mutation Attended($username: String!) {
+    attended(username: $username) {
+      username
     }
   }
 `;
