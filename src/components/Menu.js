@@ -6,6 +6,7 @@ const Menu = (props) => {
   const logout = () => {
     props.setToken(null);
     props.setName(null);
+    props.setRole(null)
     localStorage.clear();
     props.client.resetStore();
   };
@@ -17,8 +18,8 @@ const Menu = (props) => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='me-auto'>
-            {props.token && <LinkContainer to='/dashboard'><Nav.Link href='#'>Dashboard</Nav.Link></LinkContainer>}
-            {props.token && <LinkContainer to='/attendance-list'><Nav.Link href='#'>Attendance List</Nav.Link></LinkContainer>}
+            {props.token && props.setRole === "Student" && <LinkContainer to='/dashboard'><Nav.Link href='#'>Dashboard</Nav.Link></LinkContainer>}
+            {props.token && props.setRole === "Professor" && <LinkContainer to='/attendance-list'><Nav.Link href='#'>Attendance List</Nav.Link></LinkContainer>}
           </Nav>
           <Nav>
             {props.token && <LinkContainer to='/account'><Nav.Link href='#'>{props.name || 'Not signed in yet'}</Nav.Link></LinkContainer>}
